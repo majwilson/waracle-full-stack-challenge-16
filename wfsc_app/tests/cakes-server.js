@@ -11,11 +11,10 @@ const jsonReq = async ( url ) => {
 };
 
 describe( "cakes are served", () => {
-  beforeEach( () => {
+  before( () => {
     CakesCollection.insert( {
       name: "Blue Cake"
     } );
-
     CakesCollection.insert( {
       name: "Yellow Cake"
     } );
@@ -31,9 +30,9 @@ describe( "cakes are served", () => {
     expect( cakes_list.length ).to.eql( 2 );
     expect( cakes_list[ 0 ].name ).to.eql( "Blue Cake" );
     expect( cakes_list[ 1 ].yumFactor ).to.eql( 3 );
-  });
+  } );
 
-  it.only( "gets-a-cake-by-name", async () => {
+  it( "gets-a-cake-by-name", async () => {
     let cake_name = "Blue Cake";
     let url = Meteor.absoluteUrl( `/cakes/${ cake_name }` );
     // console.log( "A CAKE IS FOUND", url );
@@ -43,6 +42,13 @@ describe( "cakes are served", () => {
     // console.log( "cakes_list", cakes_list );
     expect( cakes_list.length ).to.eql( 1 );
     expect( cakes_list[ 0 ].name ).to.eql( "Blue Cake" );
-  });
+  } );
+
+  it( "raises-404-if-it-fails-to-get-a-cake-by-name", async () => {
+    let cake_name = "ORANGE Cake";
+    let url = Meteor.absoluteUrl( `/cakes/${ cake_name }` );
+    let rslt = await jsonReq( url );
+    expect( rslt.status ).to.eql( 404 );
+  } );
 
 });

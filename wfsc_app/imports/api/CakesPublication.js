@@ -10,7 +10,13 @@ Meteor.publish( 'cakes', () => {
 } );
 
 Meteor.publish( 'cake-by-name', ( name ) => {
-  return CakesCollection.find( { name: name } );
+  let rslt = CakesCollection.find( { name: name } );
+  if( !rslt.count() ) {
+    let err = new Meteor.Error( 'not-found', name );
+    err.statusCode = 404;
+    throw err;
+  }
+  return rslt;
 }, {
   url: "cakes/:0",
   httpMethod: "get"
