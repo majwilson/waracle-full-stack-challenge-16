@@ -9,14 +9,9 @@ Meteor.publish( 'cakes', () => {
   httpMethod: "get"
 } );
 
-export const Dummy = 123;
-
-// import { Mongo } from 'meteor/mongo';
-// import { SimpleRest } from 'meteor/simple:rest';
-
-// export const CakesCollection = new Mongo.Collection( 'cakes' );
-// SimpleRest.configure( {
-//   collections: [ 'cakes' ]
-// } );
-
-
+Meteor.publish( 'cake-by-name', ( name ) => {
+  return CakesCollection.find( { name: name } );
+}, {
+  url: "cakes/:0",
+  httpMethod: "get"
+} );
