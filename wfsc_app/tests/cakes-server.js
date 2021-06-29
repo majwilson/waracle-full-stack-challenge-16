@@ -51,4 +51,24 @@ describe( "cakes are served", () => {
     expect( rslt.status ).to.eql( 404 );
   } );
 
+  it( "adds-a-new-cake", async () => {
+    let cake_info = {
+      name: 'New Cake',
+      comment: 'this is a comment',
+      imageUrl: '/url/to/cake.jpg',
+      yumFactor: 5,
+    };
+    let url = Meteor.absoluteUrl( `/cakes_add` );
+    let rslt = await fetch( url, {
+        method: 'put',
+        body: new URLSearchParams( cake_info ),
+        compress: false,
+        headers: { Accept: 'application/json', contentType: 'application/x-www-form-urlencoded' }
+      }
+    );
+    expect( rslt.status ).to.eql( 200 );
+    expect( CakesCollection.find( {} ).count() ).to.eql( 3 );
+    expect( CakesCollection.findOne( { name: cake_info.name } ).name ).to.eql( cake_info.name );
+  } );
+
 });
