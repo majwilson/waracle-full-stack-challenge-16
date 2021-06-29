@@ -24,3 +24,4 @@ react-meteor-data       # React higher-order component for reactively tracking M
 meteortesting:mocha
 simple:rest
 simple:json-routes
+quave:collections
