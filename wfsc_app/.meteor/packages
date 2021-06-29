@@ -24,3 +24,4 @@ meteortesting:mocha
 simple:rest
 simple:json-routes
 quave:collections
+aldeed:collection2
