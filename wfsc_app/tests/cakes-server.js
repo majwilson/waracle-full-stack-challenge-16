@@ -58,7 +58,26 @@ describe( "cakes are served", () => {
       imageUrl: '/url/to/cake.jpg',
       yumFactor: 5,
     };
-    let url = Meteor.absoluteUrl( `/cakes_add` );
+    let url = Meteor.absoluteUrl( `/cakes` );
+    let rslt = await fetch( url, {
+      method: 'put',
+      body: new URLSearchParams( cake_info ),
+      compress: false,
+      headers: { Accept: 'application/json', contentType: 'application/x-www-form-urlencoded' }
+    } );
+    expect( rslt.status ).to.eql( 200 );
+    expect( CakesCollection.find( {} ).count() ).to.eql( 3 );
+    expect( CakesCollection.findOne( { name: cake_info.name } ).name ).to.eql( cake_info.name );
+  } );
+
+  it( "raises-422-if-adding-a-cake-with-duplicate-name", async () => {
+    let cake_info = {
+      name: "Blue Cake",
+      comment: 'this is a comment',
+      imageUrl: '/url/to/cake.jpg',
+      yumFactor: 5,
+    };
+    let url = Meteor.absoluteUrl( `/cakes` );
     let rslt = await fetch( url, {
         method: 'put',
         body: new URLSearchParams( cake_info ),
@@ -66,9 +85,7 @@ describe( "cakes are served", () => {
         headers: { Accept: 'application/json', contentType: 'application/x-www-form-urlencoded' }
       }
     );
-    expect( rslt.status ).to.eql( 200 );
-    expect( CakesCollection.find( {} ).count() ).to.eql( 3 );
-    expect( CakesCollection.findOne( { name: cake_info.name } ).name ).to.eql( cake_info.name );
+    expect( rslt.status ).to.eql( 422 );
+    expect( CakesCollection.find( {} ).count() ).to.eql( 2 );
   } );
-
 });
