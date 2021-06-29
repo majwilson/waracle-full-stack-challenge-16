@@ -2,8 +2,14 @@ import { Meteor } from 'meteor/meteor';
 import { CakesCollection } from '../db/CakesCollection';
 
 Meteor.publish( 'cakes', () => {
-  return CakesCollection.find( {} );
-});
+    console.log( "CakesCollection PUBLISH!" );
+    return CakesCollection.find( {} );
+}, {
+  url: "cakes",
+  httpMethod: "get"
+} );
+
+export const Dummy = 123;
 
 // import { Mongo } from 'meteor/mongo';
 // import { SimpleRest } from 'meteor/simple:rest';
