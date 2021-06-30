@@ -6,7 +6,7 @@ export class CakesList extends React.Component {
   render() {
     return (
       <div
-        class="CakesList">
+        className="CakesList">
         { this.props.cakes.map( ( cake, index ) => (
           <CakesListItem key={ cake._id } cake={ cake } />
         ) ) }

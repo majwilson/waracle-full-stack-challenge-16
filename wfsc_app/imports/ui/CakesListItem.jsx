@@ -6,24 +6,24 @@ export class CakesListItem extends React.Component {
   render() {
     return (
       <div
-        class="CakesListItem">
+        className="CakesListItem">
         <div
-          class="name">
+          className="name">
           { this.props.cake.name }
         </div>
         <div
-          class="yumFactor">
+          className="yumFactor">
           <YumIndicator yumFactor={ this.props.cake.yumFactor } />
         </div>
         <div
-          class="imageWrapper">
+          className="imageWrapper">
           <img
-            class="image"
+            className="image"
             src={ this.props.cake.imageUrl }
           />
         </div>
         <div
-          class="comment">
+          className="comment">
           { this.props.cake.comment }
         </div>
       </div>

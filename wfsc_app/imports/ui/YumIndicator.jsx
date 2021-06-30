@@ -4,52 +4,52 @@ export class YumIndicator extends React.Component {
   render() {
     return (
       <div
-        class="YumIndicator">
+        className="YumIndicator">
         {this.props.yumFactor >= 2 &&
           <>
-            <div class="icon">
+            <div className="icon">
               🤪
             </div>
-            <div class="text">
+            <div className="text">
               Yum yum!!
             </div>
           </>
         }
         {this.props.yumFactor == 1 &&
           <>
-            <div class="icon">
+            <div className="icon">
               😋
             </div>
-            <div class="text">
+            <div className="text">
               Yum!
             </div>
           </>
         }
         {this.props.yumFactor == 0 &&
           <>
-            <div class="icon">
+            <div className="icon">
               😐
             </div>
-            <div class="text">
+            <div className="text">
             </div>
           </>
         }
         {this.props.yumFactor == -1 &&
           <>
-            <div class="icon">
+            <div className="icon">
               🤢
             </div>
-            <div class="text">
+            <div className="text">
               Yuk!
             </div>
           </>
         }
         {this.props.yumFactor <= -2 &&
           <>
-            <div class="icon">
+            <div className="icon">
               🤮
             </div>
-            <div class="text">
+            <div className="text">
               Yuk yuk!!
             </div>
           </>
