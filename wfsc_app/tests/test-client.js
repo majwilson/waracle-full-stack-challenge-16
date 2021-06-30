@@ -8,6 +8,7 @@ configure( { adapter: new Adapter() } );
 import { YumIndicator } from '../imports/ui/YumIndicator.jsx';
 import { CakesListItem } from '../imports/ui/CakesListItem.jsx';
 import { CakesList } from '../imports/ui/CakesList.jsx';
+import { CakeForm } from '../imports/ui/CakeForm.jsx';
 
 let cakes_list = [];
 cakes_list.push( {
@@ -64,13 +65,6 @@ describe( 'YumIndicator', () => {
 
 
 describe( 'CakesListItem', () => {
-  let cake_info = {
-    name: 'New Cake',
-    comment: 'this is a comment',
-    imageUrl: '/url/to/cake.jpg',
-    yumFactor: 2,
-  };
-
   it('should-render', () => {
     const wrap = shallow(<CakesListItem cake={ cakes_list[ 0 ] } />);
     console.log( wrap.debug() );
@@ -79,9 +73,23 @@ describe( 'CakesListItem', () => {
 
 
 describe( 'CakesList', () => {
-  it.only('should-render', () => {
+  it('should-render', () => {
     const wrap = shallow(<CakesList cakes={ cakes_list } />);
     console.log( wrap.debug() );
     expect( wrap.children().length ).to.eql( 3 );
   });
 });
+
+
+describe( 'CakeForm', () => {
+  it('should-render-non-editable', () => {
+    const wrap = shallow(<CakeForm cake={ cakes_list[ 1 ] } />);
+    console.log( wrap.debug() );
+  });
+  it('should-render-editable', () => {
+    const wrap = shallow(<CakeForm cake={ cakes_list[ 1 ] } editable={ true } />);
+    console.log( wrap.debug() );
+  });
+});
+
+
