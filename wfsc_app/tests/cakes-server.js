@@ -11,7 +11,8 @@ const jsonReq = async ( url ) => {
 };
 
 describe( "cakes are served", () => {
-  before( () => {
+  beforeEach( () => {
+    CakesCollection.remove( {} );
     CakesCollection.insert( {
       name: "Blue Cake"
     } );
@@ -22,11 +23,9 @@ describe( "cakes are served", () => {
 
   it( "returns-a-list-of-cakes", async () => {
     let url = Meteor.absoluteUrl( '/cakes' );
-    // console.log( "CAKES ARE SERVED", url );
     let rslt = await fetch( url, { compress: false, headers: { Accept: 'application/json' } } );
     expect( rslt.status ).to.eql( 200 );
     let cakes_list = ( await rslt.json() ).cakes;
-    // console.log( "cakes_list", cakes_list );
     expect( cakes_list.length ).to.eql( 2 );
     expect( cakes_list[ 0 ].name ).to.eql( "Blue Cake" );
     expect( cakes_list[ 1 ].yumFactor ).to.eql( 3 );
@@ -35,11 +34,9 @@ describe( "cakes are served", () => {
   it( "gets-a-cake-by-name", async () => {
     let cake_name = "Blue Cake";
     let url = Meteor.absoluteUrl( `/cakes/${ cake_name }` );
-    // console.log( "A CAKE IS FOUND", url );
     let rslt = await jsonReq( url );
     expect( rslt.status ).to.eql( 200 );
     let cakes_list = ( await rslt.json() ).cakes;
-    // console.log( "cakes_list", cakes_list );
     expect( cakes_list.length ).to.eql( 1 );
     expect( cakes_list[ 0 ].name ).to.eql( "Blue Cake" );
   } );
@@ -88,4 +85,26 @@ describe( "cakes are served", () => {
     expect( rslt.status ).to.eql( 422 );
     expect( CakesCollection.find( {} ).count() ).to.eql( 2 );
   } );
+
+  it( "deletes-a-cake", async () => {
+    let cake_name = "Blue Cake";
+    let url = Meteor.absoluteUrl( `/cakes/${ cake_name }` );
+    let rslt = await fetch( url, {
+      method: 'delete',
+    } );
+    expect( rslt.status ).to.eql( 200 );
+    expect( CakesCollection.find( {} ).count() ).to.eql( 1 );
+  } );
+
+  it( "does-nothing-if-deleting-a-cake-that-is-not-there", async () => {
+    let cake_name = "ORANGE Cake";
+    let url = Meteor.absoluteUrl( `/cakes/${ cake_name }` );
+    let rslt = await fetch( url, {
+      method: 'delete',
+    } );
+    expect( rslt.status ).to.eql( 200 );
+    expect( CakesCollection.find( {} ).count() ).to.eql( 2 );
+  } );
 });
+
+
