@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { YumIndicator } from './YumIndicator';
+
 export class CakesListItem extends React.Component {
   render() {
     return (
@@ -11,7 +13,7 @@ export class CakesListItem extends React.Component {
         </div>
         <div
           class="yumFactor">
-          { this.props.cake.yumFactor }
+          <YumIndicator yumFactor={ this.props.cake.yumFactor } />
         </div>
         <div
           class="imageWrapper">
