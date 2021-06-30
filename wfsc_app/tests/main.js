@@ -1,5 +1,5 @@
 import assert from "assert";
-import "./cakes-server";
+import "./test-cakes-server";
 
 
 describe("wfsc_app", function () {
