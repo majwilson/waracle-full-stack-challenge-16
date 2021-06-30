@@ -7,34 +7,61 @@ configure( { adapter: new Adapter() } );
 
 import { YumIndicator } from '../imports/ui/YumIndicator.jsx';
 import { CakesListItem } from '../imports/ui/CakesListItem.jsx';
+import { CakesList } from '../imports/ui/CakesList.jsx';
+
+let cakes_list = [];
+cakes_list.push( {
+  _id: 111,
+  name: 'Blue Cake',
+  comment: 'this cake is blue',
+  imageUrl: '/blue-cake.jpg',
+  yumFactor: 2,
+} );
+cakes_list.push( {
+  _id: 222,
+  name: 'Red Cake',
+  comment: 'this cake is red',
+  imageUrl: '/red-cake.jpg',
+  yumFactor: 0,
+} );
+cakes_list.push( {
+  _id: 333,
+  name: 'Yellow Cake',
+  comment: 'this cake is yellow',
+  imageUrl: '/yellow-cake.jpg',
+  yumFactor: 0,
+} );
+
+
 
 describe( 'YumIndicator', () => {
   it('should-render-2-as-yum-yum', () => {
-    const item = shallow(<YumIndicator yumFactor="2" />);
-    // console.log( item.debug() );
-    expect( item.text() ).to.eql( "🤪Yum yum!!" );
+    const wrap = shallow(<YumIndicator yumFactor="2" />);
+    // console.log( wrap.debug() );
+    expect( wrap.text() ).to.eql( "🤪Yum yum!!" );
   });
   it('should-render-1-as-yum', () => {
-    const item = shallow(<YumIndicator yumFactor="1" />);
-    // console.log( item.debug() );
-    expect( item.text() ).to.eql( "😋Yum!" );
+    const wrap = shallow(<YumIndicator yumFactor="1" />);
+    // console.log( wrap.debug() );
+    expect( wrap.text() ).to.eql( "😋Yum!" );
   });
   it('should-render-0', () => {
-    const item = shallow(<YumIndicator yumFactor="0" />);
-    // console.log( item.debug() );
-    expect( item.text() ).to.eql( "😐" );
+    const wrap = shallow(<YumIndicator yumFactor="0" />);
+    // console.log( wrap.debug() );
+    expect( wrap.text() ).to.eql( "😐" );
   });
   it('should-render--1-as-yuk', () => {
-    const item = shallow(<YumIndicator yumFactor="-1" />);
-    // console.log( item.debug() );
-    expect( item.text() ).to.eql( "🤢Yuk!" );
+    const wrap = shallow(<YumIndicator yumFactor="-1" />);
+    // console.log( wrap.debug() );
+    expect( wrap.text() ).to.eql( "🤢Yuk!" );
   });
   it('should-render--2-as-yuk', () => {
-    const item = shallow(<YumIndicator yumFactor="-2" />);
-    // console.log( item.debug() );
-    expect( item.text() ).to.eql( "🤮Yuk yuk!!" );
+    const wrap = shallow(<YumIndicator yumFactor="-2" />);
+    // console.log( wrap.debug() );
+    expect( wrap.text() ).to.eql( "🤮Yuk yuk!!" );
   });
 });
+
 
 describe( 'CakesListItem', () => {
   let cake_info = {
@@ -44,9 +71,17 @@ describe( 'CakesListItem', () => {
     yumFactor: 2,
   };
 
-  it.only('should-render', () => {
-    const item = shallow(<CakesListItem cake={ cake_info } />);
-    console.log( item.debug() );
+  it('should-render', () => {
+    const wrap = shallow(<CakesListItem cake={ cakes_list[ 0 ] } />);
+    console.log( wrap.debug() );
+  });
+});
 
+
+describe( 'CakesList', () => {
+  it.only('should-render', () => {
+    const wrap = shallow(<CakesList cakes={ cakes_list } />);
+    console.log( wrap.debug() );
+    expect( wrap.children().length ).to.eql( 3 );
   });
 });
