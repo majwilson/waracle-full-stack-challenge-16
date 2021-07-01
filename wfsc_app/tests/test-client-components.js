@@ -11,6 +11,7 @@ import { CakesList } from '../imports/ui/CakesList.jsx';
 import { CakeForm } from '../imports/ui/CakeForm.jsx';
 import { PopUp } from '../imports/ui/PopUp.jsx';
 
+
 let cakes_list = [];
 cakes_list.push( {
   _id: 111,
@@ -33,7 +34,6 @@ cakes_list.push( {
   imageUrl: '/yellow-cake.jpg',
   yumFactor: 0,
 } );
-
 
 
 describe( 'YumIndicator', () => {
@@ -89,6 +89,18 @@ describe( 'CakeForm', () => {
   });
   it('should-render-editable', () => {
     const wrap = shallow(<CakeForm cake={ cakes_list[ 1 ] } editable={ true } />);
+    console.log( wrap.debug() );
+  });
+});
+
+
+describe( 'PopUp', () => {
+  it('should-render-non-visible', () => {
+    const wrap = shallow(<PopUp visible={ false } content={ 'POPUP-CONTENT' } />);
+    console.log( wrap.debug() );
+  });
+  it('should-render-visible', () => {
+    const wrap = shallow(<PopUp visible={ true } content={ 'POPUP-CONTENT' } />);
     console.log( wrap.debug() );
   });
 });
