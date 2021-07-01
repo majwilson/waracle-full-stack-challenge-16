@@ -5,8 +5,7 @@ import { YumIndicator } from './YumIndicator';
 export class CakesListItem extends React.Component {
   render() {
     return (
-      <div
-        className="CakesListItem">
+      <>
         <div
           className="name">
           { this.props.cake.name }
@@ -26,7 +25,7 @@ export class CakesListItem extends React.Component {
           className="comment">
           { this.props.cake.comment }
         </div>
-      </div>
+      </>
     );
   }
 }

@@ -1,13 +1,13 @@
 import { Meteor } from 'meteor/meteor';
 import { CakesCollection } from '../db/CakesCollection';
-import {SimpleRest} from 'meteor/simple:rest';
+import { SimpleRest } from 'meteor/simple:rest';
 
 SimpleRest.configure( {
   collections: [ 'cakes' ]
 } );
 
 Meteor.publish( 'cakes', () => {
-    return CakesCollection.find( {} );
+  return CakesCollection.find( {} );
 }, {
   url: "cakes",
   httpMethod: "get"
