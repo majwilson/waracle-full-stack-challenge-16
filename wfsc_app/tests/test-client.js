@@ -9,6 +9,7 @@ import { YumIndicator } from '../imports/ui/YumIndicator.jsx';
 import { CakesListItem } from '../imports/ui/CakesListItem.jsx';
 import { CakesList } from '../imports/ui/CakesList.jsx';
 import { CakeForm } from '../imports/ui/CakeForm.jsx';
+import { PopUp } from '../imports/ui/PopUp.jsx';
 
 let cakes_list = [];
 cakes_list.push( {
