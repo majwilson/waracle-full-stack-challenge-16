@@ -6,7 +6,6 @@ export class PopUp extends React.Component {
       this.props.visible &&
         <div className="popUpContainer">
           <div className="popUp">
-            <span className="closeIcon" onClick={ this.props.handleClose }>x</span>
             { this.props.children }
           </div>
         </div>

@@ -25,13 +25,18 @@ export const App = ( props ) => {
     fetchAllCakes();
   }, [] );
 
-  const getCakeByName = ( cake_name ) => {
-    for( cake of all_cakes ) {
-      if( cake.name === cake_name ) {
-        return cake;
-      }
+  const getCakeByName = ( cake_name, fallback ) => {
+    if( !cake_name ) {
+      return null;
     }
-    return null;
+    matches = all_cakes.filter( c => c.name === cake_name );
+    if( matches.length ) {
+      return matches[ 0 ]
+    }
+    if( fallback !== undefined ) {
+      return fallback
+    }
+    throw new Error( `cannot find cake ${ cake_name }!` );
   }
 
   const onEditClick = ( cake_name ) => {
@@ -42,7 +47,23 @@ export const App = ( props ) => {
   const onDeleteClick = ( cake_name ) => {
     console.log( "onDeleteClick", cake_name );
   }
+  const onClosePopUp = ( cake_name ) => {
+    set_popup_visible( false );
+  }
 
+  const onSaveEdit = ( cake_info ) => {
+    console.log( "onSaveEdit", cake_info );
+    set_popup_visible( false );
+  }
+  const onCancelEdit = () => {
+    console.log( "onCancelEdit" );
+    set_popup_visible( false );
+  }
+
+  const onAddCake = () => {
+
+
+  }
 
 
   return (
@@ -54,11 +75,21 @@ export const App = ( props ) => {
         onEditClick={ onEditClick }
         onDeleteClick={ onDeleteClick }
       />
+      <div
+        class="appButtons"
+      >
+        <div className="iconButton" onClick={ () => onAddCake ) }>
+          ➕ Add another cake
+        </div>
+      </div>
+
       <PopUp
-        visible={ popup_visible } >
+        visible={ popup_visible }>
         <CakeForm
-          editable={ cake_editable }
           cake={ getCakeByName( selected_cake ) }
+          editable={ cake_editable }
+          onSaveEdit={ onSaveEdit }
+          onCancelEdit={ onCancelEdit }
         />
       </PopUp>
     </div>

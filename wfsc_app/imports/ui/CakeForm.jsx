@@ -8,7 +8,12 @@ export class CakeForm extends React.Component {
       <form
         className="CakeForm">
         <div
-          className="name">
+          className="panel name">
+          <label>
+            Name
+          </label>
+
+
           <input
             type="text"
             value={ this.props.cake.name }
@@ -17,8 +22,13 @@ export class CakeForm extends React.Component {
           />
         </div>
         <div
-          className="yumFactor">
-          <YumIndicator yumFactor={ this.props.cake.yumFactor } />
+          className="panel yumFactor">
+          <label>
+            Yum factor
+          </label>
+          { false &&
+            <YumIndicator yumFactor={ this.props.cake.yumFactor } />
+          }
           <input
             type="text"
             value={ this.props.cake.yumFactor }
@@ -26,27 +36,47 @@ export class CakeForm extends React.Component {
             placeholder="Yum (2) or Yuk (-2)"
           />
         </div>
+        { false &&
+          <div
+            className="imageWrapper">
+            <img
+              className="image"
+              src={ this.props.cake.imageUrl }
+            />
+          </div>
+        }
         <div
-          className="imageWrapper">
-          <img
-            className="image"
-            src={ this.props.cake.imageUrl }
-          />
-        </div>
+          className="panel url">
+          <label>
+            Image url
+          </label>
           <input
-            type="text"
+            type="panel text"
             value={ this.props.cake.imageUrl }
             readOnly={ !this.props.editable }
             placeholder="The Url of the cake image"
           />
+        </div>
         <div
-          className="comment">
+          className="panel comment">
+          <label>
+            Comment
+          </label>
           <input
             type="text"
             value={ this.props.cake.comment }
             readOnly={ !this.props.editable }
             placeholder="Your comment about the cake"
           />
+        </div>
+        <div
+          className="buttons">
+          <div className="iconButton" onClick={ () => this.props.onSaveEdit( this.props.cake.name ) }>
+            ❌ Cancel
+          </div>
+          <div className="iconButton" onClick={ () => this.props.onCancelEdit( this.props.cake.name ) }>
+            ✅ Save
+          </div>
         </div>
       </form>
     );

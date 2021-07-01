@@ -10,6 +10,7 @@ body {
   list-style-type: "🥄";
   border: 2px solid lime;
   border-radius: 2rem;
+  font-size: 1rem;
 
   .CakesListItem {
     border-bottom: 2px solid tomato;
@@ -73,6 +74,7 @@ body {
   padding: 0.2rem;
   text-align:center;
   cursor: pointer;
+  display: inline-block;
 }
 
 .popUpContainer {
@@ -114,3 +116,47 @@ body {
     }
   }
 }
+
+
+.CakeForm {
+  font-size: 1rem;
+  color: olive;
+  .panel {
+    margin-bottom: 1.5rem;
+
+    label {
+      display: block;
+      margin-bottom: 0.3rem;
+      font-size: 1rem;
+    }
+    input {
+      font-size: 1.6rem;
+      width: 100%;
+      color: darkolivegreen;
+    }
+    .name {
+    }
+    .yumFactor {
+    }
+    .url {
+
+    }
+
+    .text {
+    }
+    .comment {
+
+    }
+  }
+  .buttons {
+    text-align: right;
+
+    .iconButton {
+      font-size: 1.5rem;
+      padding: 0.5rem 1rem;
+      margin-left: 2rem;
+    }
+  }
+}
+
+
