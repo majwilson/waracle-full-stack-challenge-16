@@ -26,6 +26,18 @@ export class CakesListItem extends React.Component {
           className="comment">
           { this.props.cake.comment }
         </div>
+        <div
+          className="edit">
+          <div className="iconButton" onClick={ this.props.onEditClick( this.props.cake.name ) }>
+            ✍️
+          </div>
+        </div>
+        <div
+          className="delete">
+          <div className="iconButton" onClick={ this.props.onDeleteClick( this.props.cake.name ) }>
+            🗑️
+          </div>
+        </div>
       </li>
     );
   }

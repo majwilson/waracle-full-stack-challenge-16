@@ -7,20 +7,17 @@ const CakeSchema = new SimpleSchema( {
     defaultValue: 'Cake',
   },
   comment: {
-    type: String,  // min length 5, max length 200
-    defaultValue: 'Your comment',
+    type: String,   // min length 5, max length 200
+    defaultValue: '',
   },
   imageUrl: {
     type: String,
     defaultValue: '',
   },
   yumFactor: {
-    type: Number,
-    defaultValue: 3,
+    type: Number,   // min -2, max 2
+    defaultValue: 0,
   },
-  // createdAt: {
-  //   type: Date,
-  // },
 } );
 
 export const CakesCollection = createCollection({
