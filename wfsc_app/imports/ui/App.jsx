@@ -1,11 +1,23 @@
 import React from 'react';
-import { Hello } from './Hello.jsx';
-import { Info } from './Info.jsx';
 
-export const App = () => (
-  <div>
-    <h1>Welcome to Meteor!</h1>
-    <Hello/>
-    <Info/>
-  </div>
-);
+// import { YumIndicator } from './YumIndicator.jsx';
+// import { CakesListItem } from './CakesListItem.jsx';
+import { CakesList } from './CakesList.jsx';
+import { CakeForm } from './CakeForm.jsx';
+import { PopUp } from './PopUp.jsx';
+
+export class App extends React.Component {
+  render() {
+    return (
+      <div>
+        <h1>Welcome to Cakes!</h1>
+        <PopUp
+          visible={ false } >
+          <CakeForm
+            editable={ false }
+          />
+        </PopUp>
+      </div>
+    )
+  }
+}
