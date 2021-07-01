@@ -3,8 +3,7 @@ import React from 'react';
 export class YumIndicator extends React.Component {
   render() {
     return (
-      <div
-        className="YumIndicator">
+      <>
         {this.props.yumFactor >= 2 &&
           <>
             <div className="icon">
@@ -54,7 +53,7 @@ export class YumIndicator extends React.Component {
             </div>
           </>
         }
-      </div>
+      </>
     );
   }
 }
