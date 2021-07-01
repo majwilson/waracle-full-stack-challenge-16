@@ -11,6 +11,9 @@ export class App extends React.Component {
     return (
       <div>
         <h1>Welcome to Cakes!</h1>
+        <CakesList
+          cakes={ [] }
+        />
         <PopUp
           visible={ false } >
           <CakeForm
