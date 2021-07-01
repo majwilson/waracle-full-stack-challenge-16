@@ -11,7 +11,7 @@ export class CakesListItem extends React.Component {
           className="imageWrapper">
           <div
             className="image"
-            style={ { 'background-image': `url(images${ this.props.cake.imageUrl })` } }
+            style={ { backgroundImage: `url(images${ this.props.cake.imageUrl })` } }
           />
         </div>
         <div
@@ -28,13 +28,13 @@ export class CakesListItem extends React.Component {
         </div>
         <div
           className="edit">
-          <div className="iconButton" onClick={ this.props.onEditClick( this.props.cake.name ) }>
+          <div className="iconButton" onClick={ () => this.props.onEditClick( this.props.cake.name ) }>
             ✍️
           </div>
         </div>
         <div
           className="delete">
-          <div className="iconButton" onClick={ this.props.onDeleteClick( this.props.cake.name ) }>
+          <div className="iconButton" onClick={ () => this.props.onDeleteClick( this.props.cake.name ) }>
             🗑️
           </div>
         </div>

@@ -25,17 +25,40 @@ export const App = ( props ) => {
     fetchAllCakes();
   }, [] );
 
+  const getCakeByName = ( cake_name ) => {
+    for( cake of all_cakes ) {
+      if( cake.name === cake_name ) {
+        return cake;
+      }
+    }
+    return null;
+  }
+
+  const onEditClick = ( cake_name ) => {
+    console.log( "onEditClick", cake_name );
+    set_selected_cake( cake_name );
+    set_popup_visible( true );
+  }
+  const onDeleteClick = ( cake_name ) => {
+    console.log( "onDeleteClick", cake_name );
+  }
+
+
+
   return (
     <div>
       <h1>Welcome to Cakes!</h1>
       <CakesList
         className="CakesList"
         cakes={ all_cakes }
+        onEditClick={ onEditClick }
+        onDeleteClick={ onDeleteClick }
       />
       <PopUp
-        visible={ false } >
+        visible={ popup_visible } >
         <CakeForm
-          editable={ false }
+          editable={ cake_editable }
+          cake={ getCakeByName( selected_cake ) }
         />
       </PopUp>
     </div>

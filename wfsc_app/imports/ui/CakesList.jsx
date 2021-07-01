@@ -3,12 +3,6 @@ import React from 'react';
 import { CakesListItem } from './CakesListItem';
 
 export class CakesList extends React.Component {
-  onEditClick ( cake_name ) {
-
-  }
-  onDeleteClick ( cake_name ) {
-
-  }
   render() {
     return (
       <ul
@@ -17,8 +11,8 @@ export class CakesList extends React.Component {
           <CakesListItem
             key={ cake._id }
             cake={ cake }
-            onEditClick={ this.onEditClick }
-            onDeleteClick={ this.onDeleteClick }
+            onEditClick={ this.props.onEditClick }
+            onDeleteClick={ this.props.onDeleteClick }
           />
         ) ) }
       </ul>
