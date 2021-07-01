@@ -12,6 +12,7 @@
     "canvas": "^2.8.0",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.6",
+    "fetch-mock": "^9.11.0",
     "jsdom": "^16.6.0",
     "jsdom-global": "^3.0.2",
     "meteor-node-stubs": "^1.0.1",
