@@ -71,10 +71,10 @@ export class CakeForm extends React.Component {
         </div>
         <div
           className="buttons">
-          <div className="iconButton" onClick={ () => this.props.onSaveEdit( this.props.cake.name ) }>
+          <div className="iconButton" onClick={ () => this.props.onCancelEdit( this.props.cake.name ) }>
             ❌ Cancel
           </div>
-          <div className="iconButton" onClick={ () => this.props.onCancelEdit( this.props.cake.name ) }>
+          <div className="iconButton" onClick={ () => this.props.onSaveEdit( this.props.cake.name ) }>
             ✅ Save
           </div>
         </div>

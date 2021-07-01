@@ -117,6 +117,11 @@ body {
   }
 }
 
+.appButtons {
+    .iconButton {
+      padding: 0.5rem 1rem;
+    }
+}
 
 .CakeForm {
   font-size: 1rem;
@@ -160,3 +165,81 @@ body {
 }
 
 
+
+
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: peachpuff;
+}
+::-moz-placeholder { /* Firefox 19+ */
+  color: peachpuff;
+}
+:-ms-input-placeholder { /* IE 10+ */
+  color: peachpuff;
+}
+:-moz-placeholder { /* Firefox 18- */
+  color: peachpuff;
+}
+
+
+
+
+.color-chocolate {
+  color: chocolate;
+}
+.color-mintcream {
+  color: mintcream;
+}
+.color-lime {
+  color: lime;
+}
+.color-tomato {
+  color: tomato;
+}
+.color-olive {
+  color: olive;
+}
+.color-blanchedalmond {
+  color: blanchedalmond;
+}
+.color-chartreuse {
+  color: chartreuse;
+}
+.color-darksalmon {
+  color: darksalmon;
+}
+.color-lemonchiffon {
+  color: lemonchiffon;
+}
+.color-plum {
+  color: plum;
+}
+.color-orange {
+  color: orange;
+}
+.color-darkolivegreen {
+  color: darkolivegreen;
+}
+.color-lightsalmon {
+  color: lightsalmon;
+}
+.color-papayawhip {
+  color: papayawhip;
+}
+.color-salmon {
+  color: salmon;
+}
+.color-wheat {
+  color: wheat;
+}
+.color-cornflowerblue {
+  color: cornflowerblue;
+}
+.color-limegreen {
+  color: limegreen;
+}
+.color-darkorange {
+  color: darkorange;
+}
+.color-peachpuff {
+  color: peachpuff;
+}

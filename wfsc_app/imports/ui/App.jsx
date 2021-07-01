@@ -10,9 +10,10 @@ import { PopUp } from './PopUp.jsx';
 export const App = ( props ) => {
   let [ all_cakes, set_all_cakes ] = useState( [] );
   all_cakes = all_cakes || [];
-  let [ selected_cake, set_selected_cake ] = useState( null );
-  let [ popup_visible, set_popup_visible ] = useState( false );
-  let [ cake_editable, set_cake_editable ] = useState( false );
+  let [ selected_cake, setSelectedCake ] = useState( null );
+  let [ is_popup_visible, setPopupVisible ] = useState( false );
+  let [ is_cake_editable, setCakeEditable ] = useState( false );
+  let [ is_cake_fresh, setCakeFresh ] = useState( false );
 
   useEffect( () => {
     fetchAllCakes = async () => {
@@ -40,29 +41,36 @@ export const App = ( props ) => {
   }
 
   const onEditClick = ( cake_name ) => {
-    console.log( "onEditClick", cake_name );
-    set_selected_cake( cake_name );
-    set_popup_visible( true );
+    let cake_info = getCakeByName( cake_name );
+    setSelectedCake( cake_info );
+    setCakeFresh( false );
+    setCakeEditable( false );
+    setPopupVisible( true );
   }
   const onDeleteClick = ( cake_name ) => {
     console.log( "onDeleteClick", cake_name );
   }
   const onClosePopUp = ( cake_name ) => {
-    set_popup_visible( false );
+    setPopupVisible( false );
   }
 
   const onSaveEdit = ( cake_info ) => {
     console.log( "onSaveEdit", cake_info );
-    set_popup_visible( false );
+    setPopupVisible( false );
   }
   const onCancelEdit = () => {
     console.log( "onCancelEdit" );
-    set_popup_visible( false );
+    setPopupVisible( false );
   }
 
   const onAddCake = () => {
-
-
+    const blank_cake = {
+      name: "New Cake"
+    }
+    setSelectedCake( blank_cake );
+    setCakeFresh( true );
+    setCakeEditable( true );
+    setPopupVisible( true );
   }
 
 
@@ -75,19 +83,20 @@ export const App = ( props ) => {
         onEditClick={ onEditClick }
         onDeleteClick={ onDeleteClick }
       />
+
       <div
-        class="appButtons"
+        className="appButtons" onClick={ onAddCake }
       >
-        <div className="iconButton" onClick={ () => onAddCake ) }>
+        <div className="iconButton" >
           ➕ Add another cake
         </div>
       </div>
 
       <PopUp
-        visible={ popup_visible }>
+        visible={ is_popup_visible }>
         <CakeForm
-          cake={ getCakeByName( selected_cake ) }
-          editable={ cake_editable }
+          cake={ selected_cake }
+          editable={ is_cake_editable }
           onSaveEdit={ onSaveEdit }
           onCancelEdit={ onCancelEdit }
         />
