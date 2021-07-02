@@ -64,16 +64,17 @@ export const App = ( props ) => {
   let [ is_cake_fresh, setCakeFresh ] = useState( false );
   let [ fail_valids, setFailValids ] = useState( {} );
 
+  fetchAllCakes = async () => {
+    console.log( "Fetching cakes" );
+    const result = await fetch( '/cakes', { headers: { Accept: 'application/json', } } );
+    let _all_cakes = ( await result.json() ).cakes;
+    console.log( "GOT cakes", _all_cakes );
+    set_all_cakes( _all_cakes );
+  }
+
   useEffect( () => {
-    fetchAllCakes = async () => {
-      console.log( "Fetching cakes" );
-      const result = await fetch( '/cakes', { headers: { Accept: 'application/json', } } );
-      let _all_cakes = ( await result.json() ).cakes;
-      console.log( "GOT cakes", _all_cakes );
-      set_all_cakes( _all_cakes );
-    }
     fetchAllCakes();
-  }, [  ] );
+  }, [] );
 
   const getCakeByName = ( cake_name, fallback ) => {
     if( !cake_name ) {
@@ -100,6 +101,7 @@ export const App = ( props ) => {
   const onDeleteClick = async ( cake_name ) => {
     if( confirm( `Do you really want to delete '${ cake_name }'?` ) ) {
       await jsonReq( `/cakes/${ cake_name }`, 'delete' );
+      fetchAllCakes();
     }
   }
   const onClosePopUp = ( cake_name ) => {
@@ -113,9 +115,11 @@ export const App = ( props ) => {
       setFailValids( fails );
     } else {
       setFailValids( {} );
+      setSelectedCake( cake_info );
       let method = is_cake_fresh ? 'post' : 'put';
       const result = await jsonReq( '/cakes', method, new URLSearchParams( cake_info ) );
       setPopupVisible( false );
+      fetchAllCakes();
     }
   }
 
@@ -135,22 +139,32 @@ export const App = ( props ) => {
     setCakeEditable( true );
     setFailValids( {} );
     setPopupVisible( true );
+    fetchAllCakes();
   }
 
   const onResetCakes = () => {
     jsonReq( `cakes/reset` );
+    fetchAllCakes();
   }
 
 
   return (
     <div>
       <h1>Welcome to Cakes!</h1>
-      <CakesList
-        className="CakesList"
-        cakes={ all_cakes }
-        onEditClick={ onEditClick }
-        onDeleteClick={ onDeleteClick }
-      />
+      { !all_cakes.length &&
+        <div
+          className="thereAreNoCakes">
+          There are no Cakes 😭
+        </div>
+      }
+      { all_cakes.length > 0 &&
+        <CakesList
+          className="CakesList"
+          cakes={ all_cakes }
+          onEditClick={ onEditClick }
+          onDeleteClick={ onDeleteClick }
+        />
+      }
 
       <div
         className="appButtons"
@@ -166,7 +180,7 @@ export const App = ( props ) => {
       <PopUp
         visible={ is_popup_visible }>
         <CakeForm
-          cake={ selected_cake }
+          cake={ { ... selected_cake } }
           editable={ is_cake_editable }
           fail_valids={ fail_valids }
           onSaveEdit={ onSaveEdit }
