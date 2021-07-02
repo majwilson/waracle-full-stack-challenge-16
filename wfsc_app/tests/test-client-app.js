@@ -21,14 +21,6 @@ describe( 'App', () => {
   it.only('should-render', async () => {
     const wrap = await mount(<App />);
     wrap.update();
-    let count = 20;
-    const interval = setInterval( () => {
-      console.log( "________" );
-      if( count-- < 0 ) {
-        clearInterval( interval );
-      }
-      console.log( wrap.debug() );
-    }, 100 );
-    await waitUntil( () => count < 1 );
-  });
+    console.log( wrap.debug() );
+  } );
 });

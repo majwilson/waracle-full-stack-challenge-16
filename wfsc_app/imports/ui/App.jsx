@@ -142,8 +142,8 @@ export const App = ( props ) => {
     fetchAllCakes();
   }
 
-  const onResetCakes = () => {
-    jsonReq( `cakes/reset` );
+  const onResetCakes = async () => {
+    await jsonReq( `cakes/reset` );
     fetchAllCakes();
   }
 
