@@ -7,6 +7,16 @@ import { CakeForm } from './CakeForm.jsx';
 import { PopUp } from './PopUp.jsx';
 
 
+const jsonReq = async ( url, method, body ) => {
+  return await fetch( url, {
+      method,
+      body,
+      compress: false,
+      headers: { Accept: 'application/json' }
+    } );
+};
+
+
 export const App = ( props ) => {
   let [ all_cakes, set_all_cakes ] = useState( [] );
   all_cakes = all_cakes || [];
@@ -44,7 +54,7 @@ export const App = ( props ) => {
     let cake_info = getCakeByName( cake_name );
     setSelectedCake( cake_info );
     setCakeFresh( false );
-    setCakeEditable( false );
+    setCakeEditable( true );
     setPopupVisible( true );
   }
   const onDeleteClick = ( cake_name ) => {
@@ -54,8 +64,10 @@ export const App = ( props ) => {
     setPopupVisible( false );
   }
 
-  const onSaveEdit = ( cake_info ) => {
+  const onSaveEdit = async ( cake_info ) => {
     console.log( "onSaveEdit", cake_info );
+    let method = is_cake_fresh ? 'post' : 'put';
+    const result = await jsonReq( '/cakes', method, new URLSearchParams( cake_info ) );
     setPopupVisible( false );
   }
   const onCancelEdit = () => {
@@ -65,7 +77,10 @@ export const App = ( props ) => {
 
   const onAddCake = () => {
     const blank_cake = {
-      name: "New Cake"
+      name: "New Cake",
+      comment: 'comment',
+      imageUrl: '/new-cake.jpg',
+      yumFactor: 0,
     }
     setSelectedCake( blank_cake );
     setCakeFresh( true );
