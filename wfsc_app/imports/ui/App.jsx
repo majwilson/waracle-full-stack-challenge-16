@@ -73,7 +73,7 @@ export const App = ( props ) => {
       set_all_cakes( _all_cakes );
     }
     fetchAllCakes();
-  }, [ all_cakes ] );
+  }, [  ] );
 
   const getCakeByName = ( cake_name, fallback ) => {
     if( !cake_name ) {
@@ -137,6 +137,10 @@ export const App = ( props ) => {
     setPopupVisible( true );
   }
 
+  const onResetCakes = () => {
+    jsonReq( `cakes/reset` );
+  }
+
 
   return (
     <div>
@@ -149,10 +153,13 @@ export const App = ( props ) => {
       />
 
       <div
-        className="appButtons" onClick={ onAddCake }
+        className="appButtons"
       >
-        <div className="iconButton" >
+        <div className="iconButton" onClick={ onAddCake }>
           ➕ Add another cake
+        </div>
+        <div className="iconButton floatRight" onClick={ onResetCakes }>
+          🥄 Reset cakes
         </div>
       </div>
 

@@ -6,8 +6,8 @@ body {
 }
 
 .CakesList {
-  list-style: outside;
-  list-style-type: "🥄";
+  padding: 0 1rem;
+  list-style-image: "🥄";
   border: 2px solid lime;
   border-radius: 2rem;
   font-size: 1rem;
@@ -15,7 +15,9 @@ body {
   .CakesListItem {
     border-bottom: 2px solid tomato;
     display: flex;
-
+    &:last-child {
+      border-bottom: none;
+    }
     & > * {
       display: inline-block;
       display: flex;
@@ -120,6 +122,10 @@ body {
 .appButtons {
     .iconButton {
       padding: 0.5rem 1rem;
+      color: cornflowerblue;
+    }
+    .floatRight {
+      float: right;
     }
 }
 

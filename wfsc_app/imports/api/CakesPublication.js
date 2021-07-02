@@ -1,5 +1,5 @@
 import { Meteor } from 'meteor/meteor';
-import { CakesCollection } from '../db/CakesCollection';
+import { CakesCollection, resetCakes } from '../db/CakesCollection';
 import { SimpleRest } from 'meteor/simple:rest';
 
 SimpleRest.configure( {
@@ -77,5 +77,14 @@ Meteor.publish( 'delete-by-name', ( name ) => {
       // the default parsing expects params to be integers not strings
     return [ request.params._id ];
   }
+} );
+
+
+Meteor.publish( 'cakes-reset', () => {
+  resetCakes();
+  return CakesCollection.find( {} );
+}, {
+  url: "cakes/reset",
+  httpMethod: "get"
 } );
 
