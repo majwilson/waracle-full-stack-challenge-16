@@ -4,12 +4,17 @@
 }
 
 body {
-  padding: 10px;
   font-family: sans-serif;
   background: chocolate;
   color: mintcream;
+  @media (min-width: 900px) {
+    padding: 20px;
+  }
   h1 {
     text-align: center;
+    @media (min-width: 900px) {
+      font-size: 3rem;
+    }
   }
 }
 
@@ -26,8 +31,6 @@ body {
     padding-bottom: 1rem;
     flex-wrap: wrap;
     justify-content: flex-end;
-    @media (max-width: 900px) {
-    }
 
     &:last-child {
       border-bottom: none;
@@ -35,6 +38,13 @@ body {
     & > * {
       padding: 0.5rem;
       text-align: center;
+      word-break: break-word;
+      text-overflow: ellipsis;
+      @media (min-width: 900px) {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
     }
 
     .imageWrapper {
@@ -73,6 +83,7 @@ body {
       width: 51%;
       text-align: left;
       position: relative;
+      background: chocolate;
       top: -30px;
       height: 0;
       @media (min-width: 900px) {
@@ -131,7 +142,7 @@ body {
 
 .popUpContainer {
   position: fixed;
-  background:transparent;
+  background: rgba(chocolate, 0.6);;
   width: 100%;
   height: 100vh;
   top: 0;
@@ -139,7 +150,6 @@ body {
 
   .popUp {
     position: relative;
-    /*width: 70%;*/
     margin: 0 auto;
     height: auto;
     max-height: 70vh;
@@ -149,6 +159,10 @@ body {
     padding: 20px;
     border: 1px solid peachpuff;
     overflow: auto;
+    width: 98%;
+    @media (min-width: 900px) {
+      width: 70%;
+    }
 
     .closeIcon {
       content: 'x';
@@ -173,13 +187,14 @@ body {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  justify-content: space-between;
   .iconButton {
     margin: 1rem 0;
     padding: 0.5rem 1rem;
     color: cornflowerblue;
     width: 100%;
     @media (min-width: 900px) {
-      width: 50%;
+      width: 48%;
     }
   }
   .floatRight {
@@ -224,9 +239,17 @@ body {
     text-align: right;
 
     .iconButton {
-      font-size: 1.5rem;
-      padding: 0.5rem 1rem;
-      margin-left: 2rem;
+      font-size: 1.2rem;
+      padding: 0.5rem 0rem;
+      margin-left: 1rem;
+      width: 8rem;
+
+      @media (min-width: 900px) {
+        font-size: 1.5rem;
+        padding: 0.5rem 1rem;
+        margin-left: 2rem;
+        width: 10rem;
+      }
     }
   }
 }
