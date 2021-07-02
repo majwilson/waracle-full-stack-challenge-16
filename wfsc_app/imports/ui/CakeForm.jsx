@@ -13,10 +13,9 @@ export class CakeForm extends React.Component {
             Name
           </label>
 
-
           <input
             type="text"
-            value={ this.props.cake.name }
+            defaultValue={ this.props.cake.name }
             readOnly={ !this.props.editable }
             placeholder="The name of the cake"
           />
@@ -31,7 +30,7 @@ export class CakeForm extends React.Component {
           }
           <input
             type="text"
-            value={ this.props.cake.yumFactor }
+            defaultValue={ this.props.cake.yumFactor }
             readOnly={ !this.props.editable }
             placeholder="Yum (2) or Yuk (-2)"
           />
@@ -52,7 +51,7 @@ export class CakeForm extends React.Component {
           </label>
           <input
             type="panel text"
-            value={ this.props.cake.imageUrl }
+            defaultValue={ this.props.cake.imageUrl }
             readOnly={ !this.props.editable }
             placeholder="The Url of the cake image"
           />
@@ -64,7 +63,7 @@ export class CakeForm extends React.Component {
           </label>
           <input
             type="text"
-            value={ this.props.cake.comment }
+            defaultValue={ this.props.cake.comment }
             readOnly={ !this.props.editable }
             placeholder="Your comment about the cake"
           />
