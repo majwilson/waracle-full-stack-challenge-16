@@ -1,5 +1,8 @@
 import assert from "assert";
-import "./cakes-server";
+import "./test-cakes-server";
+import "./test-cakes-validation";
+import "./test-client-components";
+import "./test-client-app";
 
 
 describe("wfsc_app", function () {

@@ -1,0 +1,284 @@
+* {
+  box-sizing: border-box;
+  border: 0px solid blue;
+}
+
+body {
+  font-family: sans-serif;
+  background: chocolate;
+  color: mintcream;
+  @media (min-width: 900px) {
+    padding: 20px;
+  }
+  h1 {
+    text-align: center;
+    @media (min-width: 900px) {
+      font-size: 3rem;
+    }
+  }
+}
+
+.thereAreNoCakes {
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 2rem;
+  @media (min-width: 900px) {
+    font-size: 2.5rem;
+  }
+}
+.CakesList {
+  padding: 0 1rem;
+  border: 2px solid lime;
+  border-radius: 2rem;
+  font-size: 1rem;
+
+  .CakesListItem {
+    border-bottom: 2px solid tomato;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    @media (min-width: 900px) {
+      margin-bottom: 0rem;
+      padding-bottom: 0rem;
+    }
+    &:last-child {
+      border-bottom: none;
+    }
+    & > * {
+      padding: 0.5rem;
+      text-align: center;
+      word-break: break-word;
+      text-overflow: ellipsis;
+      @media (min-width: 900px) {
+        display: flex;
+        align-items: center;
+
+      }
+    }
+
+    .imageWrapper {
+      width: 50%;
+      @media (min-width: 900px) {
+        width: 30%;
+      }
+      min-width: 8rem;
+      height: 8rem;
+      .image {
+        height: 100%;
+        width: 100%;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        }
+    }
+    .name {
+      font-size: 1.5rem;
+      text-align: left;
+      width: 30%;
+      @media (min-width: 900px) {
+        width: 20%;
+      }
+
+    }
+
+    .yumIndicator {
+      width: 20%;
+      @media (min-width: 900px) {
+        width: 10%;
+        justify-content: center;
+      }
+
+    }
+    .comment {
+      width: 51%;
+      text-align: left;
+      position: relative;
+      background: chocolate;
+      top: -30px;
+      height: 0;
+      @media (min-width: 900px) {
+        width: 20%;
+        position: static;
+        top: inherit;
+        height: inherit;
+      }
+    }
+    .edit {
+      width: 50%;
+      @media (min-width: 900px) {
+        width: 8%;
+      }
+
+    }
+    .delete {
+      width: 50%;
+      @media (min-width: 900px) {
+        width: 8%;
+      }
+
+    }
+    .iconButton {
+      max-width: 6rem;
+    }
+  }
+}
+
+.yumIndicator {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: flex-start;
+  align-items: center;
+  .icon {
+    font-size: 2.2rem;
+  }
+  .text {
+    font-size: 0.8rem;
+    text-align: center;
+  }
+}
+
+.iconButton {
+  background: peachpuff;
+  border-radius: 100rem;
+  font-size: 1.5rem;
+  padding: 0.2rem;
+  text-align:center;
+  cursor: pointer;
+  display: inline-block;
+  width: 100%;
+}
+
+.popUpContainer {
+  position: fixed;
+  background: rgba(chocolate, 0.6);;
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  left: 0;
+
+  .popUp {
+    position: relative;
+    margin: 0 auto;
+    height: auto;
+    max-height: 70vh;
+    margin-top: calc(100vh - 85vh - 20px);
+    background: blanchedalmond;
+    border-radius: 4px;
+    padding: 20px;
+    border: 1px solid peachpuff;
+    overflow: auto;
+    width: 98%;
+    @media (min-width: 900px) {
+      width: 70%;
+    }
+
+    .closeIcon {
+      content: 'x';
+      cursor: pointer;
+      position: fixed;
+      color: cornflowerblue;
+      right: calc(15% - 30px);
+      top: calc(100vh - 85vh - 33px);
+      background: blanchedalmond;
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      line-height: 20px;
+      text-align: center;
+      border: 1px solid peachpuff;
+      font-size: 20px;
+    }
+  }
+}
+
+.appButtons {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  .iconButton {
+    margin: 1rem 0;
+    padding: 0.5rem 1rem;
+    color: cornflowerblue;
+    width: 100%;
+    @media (min-width: 900px) {
+      width: 48%;
+    }
+  }
+  .floatRight {
+    float: right;
+  }
+}
+
+.CakeForm {
+  font-size: 1rem;
+  color: olive;
+  .panel {
+    margin-bottom: 1.5rem;
+
+    label {
+      display: block;
+      margin-bottom: 0.3rem;
+      font-size: 1rem;
+    }
+    input {
+      font-size: 1.6rem;
+      width: 100%;
+      color: darkolivegreen;
+    }
+    .name {
+    }
+    .yumFactor {
+    }
+    .url {
+    }
+    .text {
+    }
+    .comment {
+    }
+    .failValid {
+      color: tomato;
+      font-size: 1rem;
+      margin: 0.5rem 0;
+      font-weight: bold;
+    }
+  }
+  .buttons {
+    text-align: right;
+
+    .iconButton {
+      font-size: 1.2rem;
+      padding: 0.5rem 0rem;
+      margin-left: 1rem;
+      width: 8rem;
+
+      @media (min-width: 900px) {
+        font-size: 1.5rem;
+        padding: 0.5rem 1rem;
+        margin-left: 2rem;
+        width: 10rem;
+      }
+    }
+  }
+}
+
+
+// fix the color of the placeholders
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: peachpuff;
+}
+::-moz-placeholder { /* Firefox 19+ */
+  color: peachpuff;
+}
+:-ms-input-placeholder { /* IE 10+ */
+  color: peachpuff;
+}
+:-moz-placeholder { /* Firefox 18- */
+  color: peachpuff;
+}
+

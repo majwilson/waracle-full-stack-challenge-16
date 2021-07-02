@@ -9,9 +9,17 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.11.2",
+    "async-wait-until": "^2.0.7",
+    "canvas": "^2.8.0",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.6",
+    "fetch-mock": "^9.11.0",
+    "jsdom": "^16.6.0",
+    "jsdom-global": "^3.0.2",
     "meteor-node-stubs": "^1.0.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-test-renderer": "^17.0.2",
     "simpl-schema": "^1.12.0"
   },
   "meteor": {
