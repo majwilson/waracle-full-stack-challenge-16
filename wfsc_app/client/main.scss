@@ -1,13 +1,20 @@
+* {
+  box-sizing: border-box;
+  border: 0px solid blue;
+}
+
 body {
   padding: 10px;
   font-family: sans-serif;
   background: chocolate;
   color: mintcream;
+  h1 {
+    text-align: center;
+  }
 }
 
 .CakesList {
   padding: 0 1rem;
-  list-style-image: "🥄";
   border: 2px solid lime;
   border-radius: 2rem;
   font-size: 1rem;
@@ -15,20 +22,28 @@ body {
   .CakesListItem {
     border-bottom: 2px solid tomato;
     display: flex;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    @media (max-width: 900px) {
+    }
+
     &:last-child {
       border-bottom: none;
     }
     & > * {
-      display: inline-block;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
       padding: 0.5rem;
+      text-align: center;
     }
 
     .imageWrapper {
-      width: 6rem;
-      height: 6rem;
+      width: 50%;
+      @media (min-width: 900px) {
+        width: 30%;
+      }
+      min-width: 8rem;
+      height: 8rem;
       .image {
         height: 100%;
         width: 100%;
@@ -37,46 +52,81 @@ body {
         background-position: center;
         }
     }
-
     .name {
-      width: 20%;
+      font-size: 1.5rem;
+      text-align: left;
+      width: 30%;
+      @media (min-width: 900px) {
+        width: 20%;
+      }
+
     }
+
     .yumIndicator {
       width: 20%;
-      display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
-      align-content: center;
-      justify-content: flex-start;
-      align-items: center;
-      .icon {
-        font-size: 3rem;
+      @media (min-width: 900px) {
+        width: 10%;
       }
-      .text {
-        font-size: 1rem;
 
-      }
     }
     .comment {
-      width: 40%;
+      width: 51%;
+      text-align: left;
+      position: relative;
+      top: -30px;
+      height: 0;
+      @media (min-width: 900px) {
+        width: 20%;
+        position: static;
+        top: inherit;
+        height: inherit;
+      }
     }
     .edit {
-      width: 5%;
+      width: 50%;
+      @media (min-width: 900px) {
+        width: 8%;
+      }
+
     }
     .delete {
-      width: 5%;
+      width: 50%;
+      @media (min-width: 900px) {
+        width: 8%;
+      }
+
     }
+    .iconButton {
+      max-width: 6rem;
+    }
+  }
+}
+
+.yumIndicator {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: flex-start;
+  align-items: center;
+  .icon {
+    font-size: 2.2rem;
+  }
+  .text {
+    font-size: 0.8rem;
+    text-align: center;
   }
 }
 
 .iconButton {
   background: peachpuff;
   border-radius: 100rem;
-  font-size: 2rem;
+  font-size: 1.5rem;
   padding: 0.2rem;
   text-align:center;
   cursor: pointer;
   display: inline-block;
+  width: 100%;
 }
 
 .popUpContainer {
@@ -89,7 +139,7 @@ body {
 
   .popUp {
     position: relative;
-    width: 70%;
+    /*width: 70%;*/
     margin: 0 auto;
     height: auto;
     max-height: 70vh;
@@ -120,13 +170,21 @@ body {
 }
 
 .appButtons {
-    .iconButton {
-      padding: 0.5rem 1rem;
-      color: cornflowerblue;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  .iconButton {
+    margin: 1rem 0;
+    padding: 0.5rem 1rem;
+    color: cornflowerblue;
+    width: 100%;
+    @media (min-width: 900px) {
+      width: 50%;
     }
-    .floatRight {
-      float: right;
-    }
+  }
+  .floatRight {
+    float: right;
+  }
 }
 
 .CakeForm {
@@ -174,8 +232,7 @@ body {
 }
 
 
-
-
+// fix the color of the placeholders
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
   color: peachpuff;
 }
@@ -189,66 +246,3 @@ body {
   color: peachpuff;
 }
 
-
-
-
-.color-chocolate {
-  color: chocolate;
-}
-.color-mintcream {
-  color: mintcream;
-}
-.color-lime {
-  color: lime;
-}
-.color-tomato {
-  color: tomato;
-}
-.color-olive {
-  color: olive;
-}
-.color-blanchedalmond {
-  color: blanchedalmond;
-}
-.color-chartreuse {
-  color: chartreuse;
-}
-.color-darksalmon {
-  color: darksalmon;
-}
-.color-lemonchiffon {
-  color: lemonchiffon;
-}
-.color-plum {
-  color: plum;
-}
-.color-orange {
-  color: orange;
-}
-.color-darkolivegreen {
-  color: darkolivegreen;
-}
-.color-lightsalmon {
-  color: lightsalmon;
-}
-.color-papayawhip {
-  color: papayawhip;
-}
-.color-salmon {
-  color: salmon;
-}
-.color-wheat {
-  color: wheat;
-}
-.color-cornflowerblue {
-  color: cornflowerblue;
-}
-.color-limegreen {
-  color: limegreen;
-}
-.color-darkorange {
-  color: darkorange;
-}
-.color-peachpuff {
-  color: peachpuff;
-}
