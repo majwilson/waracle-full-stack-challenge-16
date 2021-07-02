@@ -28,7 +28,7 @@ describe( "cakes are served", () => {
     let cakes_list = ( await rslt.json() ).cakes;
     expect( cakes_list.length ).to.eql( 2 );
     expect( cakes_list[ 0 ].name ).to.eql( "Blue Cake" );
-    expect( cakes_list[ 1 ].yumFactor ).to.eql( 3 );
+    expect( cakes_list[ 1 ].yumFactor ).to.eql( 0 );
   } );
 
   it( "gets-a-cake-by-name", async () => {
@@ -57,7 +57,7 @@ describe( "cakes are served", () => {
     };
     let url = Meteor.absoluteUrl( `/cakes` );
     let rslt = await fetch( url, {
-      method: 'put',
+      method: 'post',
       body: new URLSearchParams( cake_info ),
       compress: false,
       headers: { Accept: 'application/json', contentType: 'application/x-www-form-urlencoded' }
@@ -76,7 +76,7 @@ describe( "cakes are served", () => {
     };
     let url = Meteor.absoluteUrl( `/cakes` );
     let rslt = await fetch( url, {
-        method: 'put',
+        method: 'post',
         body: new URLSearchParams( cake_info ),
         compress: false,
         headers: { Accept: 'application/json', contentType: 'application/x-www-form-urlencoded' }
@@ -85,6 +85,46 @@ describe( "cakes are served", () => {
     expect( rslt.status ).to.eql( 422 );
     expect( CakesCollection.find( {} ).count() ).to.eql( 2 );
   } );
+
+  describe( "put (update)", () => {
+    it( "updates-a-new-cake", async () => {
+      let cake_info = {
+        name: 'Blue Cake',
+        comment: 'this is an updated comment',
+        imageUrl: '/url/to/cake.jpg',
+        yumFactor: 5,
+      };
+      let url = Meteor.absoluteUrl( `/cakes` );
+      let rslt = await fetch( url, {
+        method: 'put',
+        body: new URLSearchParams( cake_info ),
+        compress: false,
+        headers: { Accept: 'application/json', contentType: 'application/x-www-form-urlencoded' }
+      } );
+      expect( rslt.status ).to.eql( 200 );
+      expect( CakesCollection.find( {} ).count() ).to.eql( 2 );
+      expect( CakesCollection.findOne( { name: cake_info.name } ).comment ).to.eql( cake_info.comment );
+    } );
+    it( "raises-404-if-updating-a-cake-with-non-existent-name", async () => {
+      let cake_info = {
+        name: "ORANGE Cake",
+        comment: 'this is a comment',
+        imageUrl: '/url/to/cake.jpg',
+        yumFactor: 5,
+      };
+      let url = Meteor.absoluteUrl( `/cakes` );
+      let rslt = await fetch( url, {
+          method: 'put',
+          body: new URLSearchParams( cake_info ),
+          compress: false,
+          headers: { Accept: 'application/json', contentType: 'application/x-www-form-urlencoded' }
+        }
+      );
+      expect( rslt.status ).to.eql( 404 );
+      expect( CakesCollection.find( {} ).count() ).to.eql( 2 );
+    } );
+  } );
+
 
   it( "deletes-a-cake", async () => {
     let cake_name = "Blue Cake";
