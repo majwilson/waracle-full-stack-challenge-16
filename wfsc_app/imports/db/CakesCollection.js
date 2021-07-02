@@ -34,15 +34,18 @@ const validation_methods = {
   },
   comment: {
     test: comment => comment.length >= 5 && comment.length <= 200,
-    message: 'min length 5 chars, max length 200 chars ',
+    message: 'must be min length 5 chars, max length 200 chars ',
   },
   imageUrl: {
     test: imageUrl => imageUrl.length > 1 && imageUrl.startsWith( '/' ),
     message: 'must be specified and must start with /',
   },
   yumFactor: {
-    test: yumFactor => yumFactor >= -2 && yumFactor <= 2,
-    message: 'min value -2 (yuk yuk), max value 2 (yum yum)',
+    test: yumFactor => {
+      let yum_num = parseInt( yumFactor, 10 );
+      return yum_num >= -2 && yum_num <= 2;
+    },
+    message: 'must be a number between -2 (yuk yuk) and 2 (yum yum)',
   },
 };
 
@@ -55,3 +58,19 @@ export const validateCake = ( cake ) => {
   } );
   return Object.keys( fails ).length ? fails : null;
 };
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+export const resetCakes = () => {
+  CakesCollection.remove( {} );
+  addCake( 'Dundee Cake', '/Dundee-Cake.jpeg', 2, 'Let\'s take a look... not a trace!' );
+  addCake( 'Fish Cake', '/Fish-Cake.png', -1, 'Hmmmmmmmmmmmm' );
+  addCake( 'Hamburger Cake', '/Hamburger-Cake.jpg', 0, 'Looks a bit savoury' );
+  addCake( 'Number Five Cake', '/Number-Five-Cake.jpeg', 1, 'I\d need at least two of these!' );
+  addCake( 'Peppa Pig Birthday Cake', '/Peppa-Pig-Birthday-Cake.jpeg', 1, 'Better than sausages!' );
+  addCake( 'Swiss Roll', '/Swiss-Roll.png', 1, 'Is it really a cake?' );
+  addCake( 'Yellow Cake', '/Yellow-Cake.png', -2, 'DO NOT EAT!!! It\'s Uranium' );
+};
+
+function addCake( name, imageUrl, yumFactor=0, comment='' ) {
+  CakesCollection.insert( { name, comment, yumFactor, imageUrl, } );
+}
