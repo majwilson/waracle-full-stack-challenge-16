@@ -40,13 +40,16 @@ const validation_methods = {
   },
 };
 
-export const validateCake = ( cake ) => {
+export const validateCake = ( cake, curr_names ) => {
   let fails = {};
   Object.entries( validation_methods ).forEach( ( [ k, { test, message } ] ) => {
     if( !test( cake[ k ] ) ) {
       fails[ k ] = message;
     }
   } );
+  if( curr_names.includes( cake.name ) ) {
+    fails.name = `the name '${ cake.name }' is aready in use - please choose another`;
+  }
   return Object.keys( fails ).length ? fails : null;
 };
 
@@ -70,7 +73,7 @@ export const App = ( props ) => {
       set_all_cakes( _all_cakes );
     }
     fetchAllCakes();
-  }, [] );
+  }, [ all_cakes ] );
 
   const getCakeByName = ( cake_name, fallback ) => {
     if( !cake_name ) {
@@ -91,10 +94,10 @@ export const App = ( props ) => {
     setSelectedCake( cake_info );
     setCakeFresh( false );
     setCakeEditable( true );
+    setFailValids( {} );
     setPopupVisible( true );
   }
   const onDeleteClick = async ( cake_name ) => {
-    console.log( "onDeleteClick", cake_name );
     if( confirm( `Do you really want to delete '${ cake_name }'?` ) ) {
       await jsonReq( `/cakes/${ cake_name }`, 'delete' );
     }
@@ -104,8 +107,8 @@ export const App = ( props ) => {
   }
 
   const onSaveEdit = async ( cake_info ) => {
-    console.log( "onSaveEdit", cake_info );
-    fails = validateCake( cake_info );
+    let curr_names = is_cake_fresh ? all_cakes.map( c => c.name ) : [];
+    fails = validateCake( cake_info, curr_names );
     if( fails ) {
       setFailValids( fails );
     } else {
@@ -117,7 +120,6 @@ export const App = ( props ) => {
   }
 
   const onCancelEdit = () => {
-    console.log( "onCancelEdit" );
     setPopupVisible( false );
   }
 
@@ -131,6 +133,7 @@ export const App = ( props ) => {
     setSelectedCake( blank_cake );
     setCakeFresh( true );
     setCakeEditable( true );
+    setFailValids( {} );
     setPopupVisible( true );
   }
 
