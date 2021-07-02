@@ -93,10 +93,10 @@ export const App = ( props ) => {
     setCakeEditable( true );
     setPopupVisible( true );
   }
-  const onDeleteClick = ( cake_name ) => {
+  const onDeleteClick = async ( cake_name ) => {
     console.log( "onDeleteClick", cake_name );
     if( confirm( `Do you really want to delete '${ cake_name }'?` ) ) {
-      console.log( "DELETE", cake_name );
+      await jsonReq( `/cakes/${ cake_name }`, 'delete' );
     }
   }
   const onClosePopUp = ( cake_name ) => {
