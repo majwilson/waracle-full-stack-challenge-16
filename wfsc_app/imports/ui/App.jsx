@@ -78,8 +78,8 @@ export const App = ( props ) => {
   const onAddCake = () => {
     const blank_cake = {
       name: "New Cake",
-      comment: 'comment',
-      imageUrl: '/new-cake.jpg',
+      comment: '',
+      imageUrl: '/Fallback-Cake.png',
       yumFactor: 0,
     }
     setSelectedCake( blank_cake );
