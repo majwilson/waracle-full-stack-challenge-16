@@ -26,40 +26,6 @@ export const CakesCollection = createCollection({
 });
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-// SimpleSchema has validation but its too much for me to get into now!
-const validation_methods = {
-  name: {
-    test: name => name.length > 0,
-    message: 'must be specified',
-  },
-  comment: {
-    test: comment => comment.length >= 5 && comment.length <= 200,
-    message: 'must be min length 5 chars, max length 200 chars ',
-  },
-  imageUrl: {
-    test: imageUrl => imageUrl.length > 1 && imageUrl.startsWith( '/' ),
-    message: 'must be specified and must start with /',
-  },
-  yumFactor: {
-    test: yumFactor => {
-      let yum_num = parseInt( yumFactor, 10 );
-      return yum_num >= -2 && yum_num <= 2;
-    },
-    message: 'must be a number between -2 (yuk yuk) and 2 (yum yum)',
-  },
-};
-
-export const validateCake = ( cake ) => {
-  let fails = {};
-  Object.entries( validation_methods ).forEach( ( [ k, { test, message } ] ) => {
-    if( !test( cake[ k ] ) ) {
-      fails[ k ] = message;
-    }
-  } );
-  return Object.keys( fails ).length ? fails : null;
-};
-
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 export const resetCakes = () => {
   CakesCollection.remove( {} );
   addCake( 'Dundee Cake', '/Dundee-Cake.jpeg', 2, 'Let\'s take a look... not a trace!' );

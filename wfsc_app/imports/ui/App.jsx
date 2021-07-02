@@ -16,6 +16,41 @@ const jsonReq = async ( url, method, body ) => {
     } );
 };
 
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+// SimpleSchema has validation but its too much for me to get into now!
+const validation_methods = {
+  name: {
+    test: name => name.length > 0,
+    message: 'must be specified',
+  },
+  comment: {
+    test: comment => comment.length >= 5 && comment.length <= 200,
+    message: 'must be min length 5 chars, max length 200 chars ',
+  },
+  imageUrl: {
+    test: imageUrl => imageUrl.length > 1 && imageUrl.startsWith( '/' ),
+    message: 'must be specified and must start with /',
+  },
+  yumFactor: {
+    test: yumFactor => {
+      let yum_num = parseInt( yumFactor, 10 );
+      return yum_num >= -2 && yum_num <= 2;
+    },
+    message: 'must be a number between -2 (yuk yuk) and 2 (yum yum)',
+  },
+};
+
+export const validateCake = ( cake ) => {
+  let fails = {};
+  Object.entries( validation_methods ).forEach( ( [ k, { test, message } ] ) => {
+    if( !test( cake[ k ] ) ) {
+      fails[ k ] = message;
+    }
+  } );
+  return Object.keys( fails ).length ? fails : null;
+};
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 export const App = ( props ) => {
   let [ all_cakes, set_all_cakes ] = useState( [] );
@@ -24,6 +59,7 @@ export const App = ( props ) => {
   let [ is_popup_visible, setPopupVisible ] = useState( false );
   let [ is_cake_editable, setCakeEditable ] = useState( false );
   let [ is_cake_fresh, setCakeFresh ] = useState( false );
+  let [ fail_valids, setFailValids ] = useState( {} );
 
   useEffect( () => {
     fetchAllCakes = async () => {
@@ -59,6 +95,9 @@ export const App = ( props ) => {
   }
   const onDeleteClick = ( cake_name ) => {
     console.log( "onDeleteClick", cake_name );
+    if( confirm( `Do you really want to delete '${ cake_name }'?` ) ) {
+      console.log( "DELETE", cake_name );
+    }
   }
   const onClosePopUp = ( cake_name ) => {
     setPopupVisible( false );
@@ -66,10 +105,17 @@ export const App = ( props ) => {
 
   const onSaveEdit = async ( cake_info ) => {
     console.log( "onSaveEdit", cake_info );
-    let method = is_cake_fresh ? 'post' : 'put';
-    const result = await jsonReq( '/cakes', method, new URLSearchParams( cake_info ) );
-    setPopupVisible( false );
+    fails = validateCake( cake_info );
+    if( fails ) {
+      setFailValids( fails );
+    } else {
+      setFailValids( {} );
+      let method = is_cake_fresh ? 'post' : 'put';
+      const result = await jsonReq( '/cakes', method, new URLSearchParams( cake_info ) );
+      setPopupVisible( false );
+    }
   }
+
   const onCancelEdit = () => {
     console.log( "onCancelEdit" );
     setPopupVisible( false );
@@ -112,6 +158,7 @@ export const App = ( props ) => {
         <CakeForm
           cake={ selected_cake }
           editable={ is_cake_editable }
+          fail_valids={ fail_valids }
           onSaveEdit={ onSaveEdit }
           onCancelEdit={ onCancelEdit }
         />

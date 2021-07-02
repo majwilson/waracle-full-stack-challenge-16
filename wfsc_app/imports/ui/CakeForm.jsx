@@ -31,6 +31,13 @@ export class CakeForm extends React.Component {
             onChange={ this.onChange.bind( this ) }
             placeholder="The name of the cake"
           />
+          { this.props.fail_valids.name &&
+            <div
+              className="failValid">
+              { this.props.fail_valids.name }
+            </div>
+          }
+
         </div>
         <div
           className="panel yumFactor">
@@ -48,6 +55,13 @@ export class CakeForm extends React.Component {
             onChange={ this.onChange.bind( this ) }
             placeholder="Yum (2) or Yuk (-2)"
           />
+          { this.props.fail_valids.yumFactor &&
+            <div
+              className="failValid">
+              { this.props.fail_valids.yumFactor }
+            </div>
+          }
+
         </div>
         { false &&
           <div
@@ -71,6 +85,13 @@ export class CakeForm extends React.Component {
             onChange={ this.onChange.bind( this ) }
             placeholder="The Url of the cake image"
           />
+          { this.props.fail_valids.imageUrl &&
+            <div
+              className="failValid">
+              { this.props.fail_valids.imageUrl }
+            </div>
+          }
+
         </div>
         <div
           className="panel comment">
@@ -85,6 +106,13 @@ export class CakeForm extends React.Component {
             onChange={ this.onChange.bind( this ) }
             placeholder="Your comment about the cake"
           />
+          { this.props.fail_valids.comment &&
+            <div
+              className="failValid">
+              { this.props.fail_valids.comment }
+            </div>
+          }
+
         </div>
         <div
           className="buttons">

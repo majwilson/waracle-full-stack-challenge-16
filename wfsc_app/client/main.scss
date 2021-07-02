@@ -144,13 +144,16 @@ body {
     .yumFactor {
     }
     .url {
-
     }
-
     .text {
     }
     .comment {
-
+    }
+    .failValid {
+      color: tomato;
+      font-size: 1rem;
+      margin: 0.5rem 0;
+      font-weight: bold;
     }
   }
   .buttons {
