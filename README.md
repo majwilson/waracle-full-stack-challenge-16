@@ -42,6 +42,29 @@ meteor
 
 Then point your browser at `http://localhost:3000/`
 
+## Files of Interest
+
+* wfsc_app/imports/api/CakesPublication.js
+    * The rest handlers
+
+* wfsc_app/imports/db/CakesCollection.js
+    * The Cake 'model' & collection
+
+* wfsc_app/imports/ui/
+    * Jsx for the UI
+
+* wfsc_app/client/main.html
+    * Initial page for the app
+
+* wfsc_app/client/main.scss
+    * The styles for the browser
+
+* wfsc_app/server/main.js
+    * Server startup (not much to see)
+
+* wfsc_app/tests/
+    * The tests - only the ones in test-cakes-server.js are really valid
+
 
 ## Notes
 
@@ -49,7 +72,7 @@ This is built in Meteor + React. I've not used Meteor before, but it got Mongo &
 
 Getting the server side of things going was pretty much test-driven (see wfsc_app/tests/test-cakes-server.js). But once I started on the front-end, testing took a bit of a back seat. In the real-world I'd have done tests for the front-end too, but with limited time, constant browser refreshes were a quicker alternative.
 
-The biggest pain turned out to be form validation - I really wanted to do that on the server side but it turned out to be fairly difficult to return detailed failure info to the client (due to the way `Meteor.publish()` works). So I cut my losses and just did validation in the client (something I'd never do in the real world!).
+The biggest pain turned out to be form validation - I really wanted to do that on the server side but it turned out to be fairly difficult to return detailed failure info to the client (due to the way `Meteor.publish()` works). So I cut my losses and just did validation in the client.
 
 I couldn't resist making the program handle updates to existing cakes as well as creation of new ones (it actually made working on the thing easier). I used PUT to handle updates to existing cakes, POST to handle creation of new cakes.
 
